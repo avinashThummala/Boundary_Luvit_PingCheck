@@ -20,7 +20,7 @@ elseif (_platform == 'darwin') then
     _options = {'-n', '-t 2', '-c 1'}
 
 else 
-	io.stderr:write('Your platform is not supported.  We currently support Linux, Windows and OSX')
+    io.stderr:write('Your platform is not supported.  We currently support Linux, Windows and OSX')
     os.exit(-1)
 end
 
@@ -48,7 +48,7 @@ function pingHost(host, cb)
     end)
 
     ping.stderr:on('data', function (data)
-    	output = output .. tostring(data) 
+        output = output .. tostring(data) 
     end)
 
     ping:on('exit', function (code)        
@@ -76,27 +76,27 @@ function pingHost(host, cb)
         -- Parse the data to get the ping time
         local pingTime, index, prevIndex, i, j, time = 0, 0, 0, 0, 0, 0
 
-	    while true do
+        while true do
 
-	    	prevIndex = index
-	      	index = string.find(output, "\n", index+1)
+            prevIndex = index
+            index = string.find(output, "\n", index+1)
 
-	      	if index == nil then break end
+            if index == nil then break end
 
-	      	local line = string.sub(output, prevIndex, index-1)
-	      	i, j, time  = string.find(line, "time=([0-9]*%.?[0-9]+)")
+            local line = string.sub(output, prevIndex, index-1)
+            i, j, time  = string.find(line, "time=([0-9]*%.?[0-9]+)")
 
-	      	if(time) then 
-	      		pingTime = tonumber(time)
-	      		break
-	      	end
+            if(time) then 
+                pingTime = tonumber(time)
+                break
+            end
 
-	    end        
+        end        
 
-		return cb and cb(nil, pingTime)        
+        return cb and cb(nil, pingTime)        
 
     end)
 
-end	
+end
 
 exports.ping = pingHost

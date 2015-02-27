@@ -18,14 +18,14 @@ local pollInterval = param.pollInterval or 1000
 local previous = {}
 
 function logSuccess(source, duration)
-	io.stdout:write('PING_RESPONSETIME '..duration..' '..source..'\n')
+    io.stdout:write('PING_RESPONSETIME '..duration..' '..source..'\n')
 end
 
 function logFailure(err, source, duration)
     if (err) then
-    	io.stderr:write(err .. '\n')
+        io.stderr:write(err .. '\n')
     else
-		io.stdout:write('PING_RESPONSETIME '..HOST_IS_DOWN..' '..source..'\n')
+        io.stdout:write('PING_RESPONSETIME '..HOST_IS_DOWN..' '..source..'\n')
     end
 end
 
@@ -42,14 +42,14 @@ end
 -- Validate the hosts intervals
 table.foreach(param.items, function(hIndex)
 
-	local host = param.items[hIndex]
+    local host = param.items[hIndex]
     local pollInterval = 5
 
     if host.pollInterval then
-    	pollInterval = tonumber(host.pollInterval)
-	end
+        pollInterval = tonumber(host.pollInterval)
+    end
 
-	--Lets assume that the poll interval associated with hosts is provided in seconds
+    --Lets assume that the poll interval associated with hosts is provided in seconds
 
     host.pollInterval = pollInterval
 
@@ -62,8 +62,8 @@ function pingHost(host, cb)
     local source = host.source
 
     if(not previous[source]) then
-    	previous[source] = os.time()
-	end    	
+        previous[source] = os.time()
+    end    	
 
     local now = os.time()
 
@@ -84,7 +84,7 @@ function pingHost(host, cb)
 
         else
             logSuccess(source, responseTime)
-		end        
+        end        
 
         return cb(nil)
     end)

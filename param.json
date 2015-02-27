@@ -1,0 +1,15 @@
+{
+   "items": [
+      {
+         "source": "google1",
+         "pollInterval": "5",
+         "host": "www.google.com"
+      },
+      {
+         "source": "yahoo1",
+         "pollInterval": "7",
+         "host": "www.yahoo.com"
+      }
+   ],
+   "pollInterval": 1000
+}
